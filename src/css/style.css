@@ -290,3 +290,19 @@ footer {
   padding: 2px 6px;
   border-radius: 50%;
 }
+
+.product-card__original {
+  text-decoration: line-through;
+  color: gray;
+  margin: 0;
+}
+
+.product-card__discount {
+  color: red;
+  font-weight: bold;
+  margin-top: 0.3rem;
+}
+
+.product-pricing {
+  margin-bottom: 1rem;
+}
