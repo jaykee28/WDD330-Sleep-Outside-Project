@@ -31,7 +31,22 @@ renderProductDetails() {
       alt="${this.product.Name}"
     />
 
-    <p class="product-card__price">$${this.product.FinalPrice}</p>
+    <div class="product-pricing">
+  <p class="product-card__price">
+    $${this.product.FinalPrice}
+  </p>
+
+  <p class="product-card__original">
+    $${this.product.SuggestedRetailPrice}
+  </p>
+
+  <p class="product-card__discount">
+    Save ${Math.round(
+      ((this.product.SuggestedRetailPrice - this.product.FinalPrice) /
+      this.product.SuggestedRetailPrice) * 100
+    )}%
+  </p>
+</div>
 
     <p class="product__color">
       ${this.product.Colors[0].ColorName}
