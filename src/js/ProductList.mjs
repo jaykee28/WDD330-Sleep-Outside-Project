@@ -5,7 +5,7 @@ function productCardTemplate(product) {
     <li class="product-card">
       <a href="/product_pages/index.html?product=${product.Id}">
         <img
-          src="${product.Image}"
+          src="${product.Images.PrimaryMedium}"
           alt="${product.Name}"
         />
 
@@ -25,7 +25,6 @@ function productCardTemplate(product) {
   `;
 }
 
-
 export default class ProductList {
   constructor(category, dataSource, listElement) {
     this.category = category;
@@ -33,18 +32,22 @@ export default class ProductList {
     this.listElement = listElement;
   }
 
-async init() {
-  const list = await this.dataSource.getData();
+  async init() {
+    const list =
+      await this.dataSource.getData(
+        this.category
+      );
 
-  this.renderList(list);
-  } 
+    console.log(list);
 
+    this.renderList(list);
+  }
 
-renderList(list) {
-  renderListWithTemplate(
-    productCardTemplate,
-    this.listElement,
-    list
-  );
-}
+  renderList(list) {
+    renderListWithTemplate(
+      productCardTemplate,
+      this.listElement,
+      list
+    );
+  }
 }
