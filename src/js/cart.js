@@ -1,4 +1,7 @@
 import { getLocalStorage, setLocalStorage } from './utils.mjs';
+import { loadHeaderFooter } from './utils.mjs';
+
+loadHeaderFooter();
 
 // Handle remove click
 function handleRemoveItem(e) {

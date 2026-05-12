@@ -2,11 +2,16 @@ import { getLocalStorage } from './utils.mjs';
 
 function updateCartCount() {
   const cartItems = getLocalStorage('so-cart') || [];
-  const countElement = document.getElementById('cart-count');
 
-  if (countElement) {
-    countElement.textContent = cartItems.length;
+  const cartCount =
+    document.querySelector('.cart-count');
+
+  if (cartCount) {
+    cartCount.textContent = cartItems.length;
   }
 }
 
-updateCartCount();
+document.addEventListener(
+  'templateLoaded',
+  updateCartCount
+);
