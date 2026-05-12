@@ -30,7 +30,7 @@ function cartItemTemplate(item) {
   return `<li class="cart-card divider">
     <span class="remove-item" data-id="${item.Id}">❌</span>
     <a href="#" class="cart-card__image">
-      <img src="${item.Image}" alt="${item.Name}" />
+      <img src="${item.Images.PrimaryMedium}" alt="${item.Name}" />
     </a>
     <a href="#">
       <h2 class="card__name">${item.Name}</h2>
@@ -55,23 +55,47 @@ function updateCartCount(cartItems) {
 
 // Render
 function renderCartContents() {
-  const cartItems = getLocalStorage('so-cart') || [];
+  const cartItems =
+    getLocalStorage('so-cart') || [];
 
   updateCartCount(cartItems);
 
+  const cartFooter =
+    document.querySelector('.cart-footer');
+
   if (cartItems.length === 0) {
-    document.querySelector('.product-list').innerHTML = '<p>Your cart is empty.</p>';
-    document.getElementById('cart-total-value').textContent = '0.00';
+    document.querySelector(
+      '.product-list'
+    ).innerHTML =
+      '<p>Your cart is empty.</p>';
+
+    document.getElementById(
+      'cart-total-value'
+    ).textContent = '0.00';
+
+    cartFooter.classList.add('hide');
+
     return;
   }
 
-  const htmlItems = cartItems.map((item) => cartItemTemplate(item));
-  document.querySelector('.product-list').innerHTML = htmlItems.join('');
+  cartFooter.classList.remove('hide');
+
+  const htmlItems = cartItems.map(
+    (item) => cartItemTemplate(item)
+  );
+
+  document.querySelector(
+    '.product-list'
+  ).innerHTML = htmlItems.join('');
 
   attachRemoveListeners();
 
-  const total = calculateTotal(cartItems);
-  document.getElementById('cart-total-value').textContent = total.toFixed(2);
+  const total =
+    calculateTotal(cartItems);
+
+  document.getElementById(
+    'cart-total-value'
+  ).textContent = total.toFixed(2);
 }
 
 // Init
